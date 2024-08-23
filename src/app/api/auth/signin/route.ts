@@ -1,37 +1,38 @@
-import Prisma from '@/lib/dbConnect';
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from '@/lib/dbConnect';
 import { comparePassword } from '@/lib/bcrypt';
 import { generateToken } from '@/lib/auth';
-import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
-export async function POST(request: Request) {
-  try {
-    const { username, password } = await request.json();
+const signinBody = z.object({
+    username: z.string().email(),
+    password: z.string().min(6),
+});
 
-    const user = await Prisma.user.findUnique({ where: { username } });
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json();
+        const parsedBody = signinBody.safeParse(body);
 
-    if (!user) {
-      return NextResponse.json({ error: 'User does not exist' }, { status: 400 });
+        if (!parsedBody.success) {
+            return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+        }
+
+        const { username, password } = parsedBody.data;
+
+        const user = await prisma.user.findUnique({ where: { username } });
+
+        if (!user || !(await comparePassword(password, user.password))) {
+            return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
+        }
+
+        const token = generateToken(user.id);
+
+        return NextResponse.json({
+            token,
+            user: { id: user.id, username: user.username, firstName: user.firstName, lastName: user.lastName },
+        });
+    } catch (error) {
+        return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
-
-    const isPasswordValid = await comparePassword(password, user.password);
-
-    if (!isPasswordValid) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 400 });
-    }
-
-    const token = generateToken(user.id);
-
-    return NextResponse.json({
-      token,
-      user: {
-        id: user.id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      },
-    });
-  } catch (error) {
-    console.error('Error during sign-in:', error);
-    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
-  }
 }

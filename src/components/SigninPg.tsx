@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function SigninFormDemo() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ export default function SigninFormDemo() {
 
   const [error, setError] = useState("");
   const router = useRouter()
+  const { login } = useAuth();  // Use the login function from AuthContext
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -22,7 +24,7 @@ export default function SigninFormDemo() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-
+  
     try {
       const response = await fetch("/api/auth/signin", {
         method: "POST",
@@ -36,11 +38,8 @@ export default function SigninFormDemo() {
       });
 
       if (response.ok) {
-        
         const data = await response.json();
-        
-        localStorage.setItem("token", data.token);
-       
+        login(data.token, data.user);  // Use the login function
         router.push("/dashboard");
       } else {
         const data = await response.json();

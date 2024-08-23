@@ -4,6 +4,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function SignupFormDemo() {
   const [formData, setFormData] = useState({
@@ -14,7 +16,8 @@ export default function SignupFormDemo() {
   });
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const router = useRouter();
+  const { login } = useAuth();  // Use the login function from AuthContext
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -23,7 +26,6 @@ export default function SignupFormDemo() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
 
     try {
       const response = await fetch("/api/auth/signup", {
@@ -40,8 +42,9 @@ export default function SignupFormDemo() {
       });
 
       if (response.ok) {
-        setSuccess("Sign up successful!");
-
+        const data = await response.json();
+        login(data.token, data.user);  // Use the login function
+        router.push("/dashboard");
       } else {
         const data = await response.json();
         setError(data.error || "Something went wrong. Please try again.");
@@ -61,7 +64,6 @@ export default function SignupFormDemo() {
       </p>
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
-      {success && <p className="text-green-500 text-sm">{success}</p>}
 
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">

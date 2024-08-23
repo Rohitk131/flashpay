@@ -1,39 +1,57 @@
-import { NextResponse } from 'next/server';
-import Prisma from '@/lib/dbConnect';
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from '@/lib/dbConnect';
 import { hashPassword } from '@/lib/bcrypt';
+import { generateToken } from '@/lib/auth';
+import { z } from 'zod';
 
-export async function POST(request: Request) {
-  try {
-    const { username, password, firstName, lastName } = await request.json(); 
-    
-    const existingUser = await Prisma.user.findUnique({ where: { username } });
+const signupBody = z.object({
+    username: z.string().email(),
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    password: z.string().min(6),
+});
 
-    if (existingUser) {
-      return NextResponse.json({ error: 'User already exists' }, { status: 400 });
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json();
+        const parsedBody = signupBody.safeParse(body);
+
+        if (!parsedBody.success) {
+            return NextResponse.json({
+                message: "Email already taken / Incorrect inputs"
+            }, { status: 411 });
+        }
+
+        const { username, firstName, lastName, password } = parsedBody.data;
+
+        const existingUser = await prisma.user.findUnique({ where: { username } });
+
+        if (existingUser) {
+            return NextResponse.json({
+                message: "Email already taken"
+            }, { status: 411 });
+        }
+
+        const hashedPassword = await hashPassword(password);
+
+        const user = await prisma.user.create({
+            data: { username, firstName, lastName, password: hashedPassword },
+        });
+
+        const account = await prisma.account.create({
+            data: {
+                userId: user.id,
+                balance: 1 + Math.random() * 10000,
+            },
+        });
+
+        const token = generateToken(user.id);
+
+        return NextResponse.json({
+            message: "User created successfully",
+            token,
+        });
+    } catch (error) {
+        return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
-
-    
-    const hashedPassword = await hashPassword(password);
-
-    
-    const newUser = await Prisma.user.create({
-      data: {
-        username,
-        password: hashedPassword,
-        firstName,
-        lastName,
-      },
-    });
-
-   
-    return NextResponse.json({
-      id: newUser.id,
-      username: newUser.username,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-    }, { status: 201 });
-  } catch (error) {
-    console.error('Error during user sign-up:', error);
-    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
-  }
 }
