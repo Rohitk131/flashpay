@@ -40,9 +40,6 @@ export default function Component() {
           <img src='https://i.ibb.co/x8Hv1xg/flashpay-05-removebg-preview-1.png' width={40} height={40} />
           <span className="ml-2 text-xl font-bold">Flash Pay</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          
-        </nav>
         <div className="ml-4 flex gap-2">
           <Link href='/signin'>
           <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground transition-colors">
