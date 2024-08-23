@@ -20,3 +20,4 @@ model User {
   firstName String  @db.VarChar(50)
   lastName  String  @db.VarChar(50)
 }
+
