@@ -1,10 +1,10 @@
 'use client'
 import { useSearchParams, useRouter } from 'next/navigation';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 
-export default function SendMoney() {
+function SendMoneyContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { user } = useAuth();
@@ -40,7 +40,7 @@ export default function SendMoney() {
             });
             console.log('Transfer successful:', response.data);
             alert('Transfer successful!');
-            router.push('/dashboard'); // Redirect to dashboard or appropriate page
+            router.push('/dashboard'); 
         } catch (error: any) {
             console.error('There was an error initiating the transfer:', error);
             setError(error.response?.data?.message || "An error occurred during the transfer.");
@@ -89,5 +89,13 @@ export default function SendMoney() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function SendMoney() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SendMoneyContent />
+        </Suspense>
     );
 }
