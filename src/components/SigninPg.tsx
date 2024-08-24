@@ -4,8 +4,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function SigninFormDemo() {
   const [formData, setFormData] = useState({
@@ -14,8 +14,8 @@ export default function SigninFormDemo() {
   });
 
   const [error, setError] = useState("");
-  const router = useRouter()
-  const { login } = useAuth();  // Use the login function from AuthContext
+  const router = useRouter();
+  const { login } = useAuth(); // Use the login function from AuthContext
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -24,7 +24,7 @@ export default function SigninFormDemo() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-  
+
     try {
       const response = await fetch("/api/auth/signin", {
         method: "POST",
@@ -39,7 +39,7 @@ export default function SigninFormDemo() {
 
       if (response.ok) {
         const data = await response.json();
-        login(data.token, data.user);  // Use the login function
+        login(data.token, data.user); // Use the login function
         router.push("/dashboard");
       } else {
         const data = await response.json();
@@ -96,7 +96,7 @@ export default function SigninFormDemo() {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300 text-center">
-          Don't have an account yet?
+          Don&apos;t have an account yet?
           <Link href="/signup">
             <span className="text-purple-600"> Sign Up</span>
           </Link>

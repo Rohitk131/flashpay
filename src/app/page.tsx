@@ -28,7 +28,7 @@ export default function Component() {
   ]
 
   const testimonials = [
-    { quote: "Flash Pay has revolutionized how I send money to friends. It's so fast and easy!", author: "Sarah J." },
+    { quote: "Flash Pay has revolutionized how I send money to friends. It&apos;s so fast and easy!", author: "Sarah J." },
     { quote: "I love how secure Flash Pay is. I feel confident using it for all my transactions.", author: "Michael T." },
     { quote: "The mobile app is fantastic. I can send money on the go with just a few taps!", author: "Emily R." }
   ]
@@ -163,7 +163,7 @@ export default function Component() {
                 <motion.div key={index} variants={fadeIn} transition={{ delay: index * 0.1 }}>
                   <Card className="hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="flex flex-col space-y-2 p-6">
-                      <p className="text-gray-500 dark:text-gray-400">"{testimonial.quote}"</p>
+                      <p className="text-gray-500 dark:text-gray-400">&quot;{testimonial.quote}&quot;</p>
                       <p className="font-semibold">- {testimonial.author}</p>
                     </CardContent>
                   </Card>
@@ -182,29 +182,35 @@ export default function Component() {
           variants={fadeIn}
           transition={{ duration: 0.5 }}
         >
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <motion.div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Ready to Get Started?
-                </h2>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Sign up today and start sending money instantly with Flash Pay!
-                </p>
-              </motion.div>
-              <motion.div className="space-x-4">
-                <Button className="bg-primary hover:bg-primary/90 transition-colors">Sign Up Now</Button>
-                <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground transition-colors">
-                  Learn More
-                </Button>
-              </motion.div>
-            </div>
+          <div className="container px-4 md:px-6 text-center">
+            <motion.h2 
+              className="text-3xl font-bold tracking-tighter sm:text-5xl"
+              variants={fadeIn}
+              transition={{ delay: 0.2 }}
+            >
+              Ready to Flash?
+            </motion.h2>
+            <motion.p 
+              className="max-w-[700px] mx-auto text-gray-500 md:text-xl mt-4 dark:text-gray-400"
+              variants={fadeIn}
+              transition={{ delay: 0.4 }}
+            >
+              Sign up today and start sending money with ease and security.
+            </motion.p>
+            <motion.div 
+              className="space-x-4 mt-8"
+              variants={fadeIn}
+              transition={{ delay: 0.6 }}
+            >
+              <Button className="bg-primary hover:bg-primary/90 transition-colors">Get Started</Button>
+              <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground transition-colors">Learn More</Button>
+            </motion.div>
           </div>
         </motion.section>
 
         <motion.section 
           id="newsletter" 
-          className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800"
+          className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -212,41 +218,37 @@ export default function Component() {
           transition={{ duration: 0.5 }}
         >
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Stay Updated
-              </h2>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Subscribe to our newsletter to receive the latest news and exclusive offers.
+            <motion.div 
+              className="flex flex-col items-center space-y-6 text-center"
+              variants={fadeIn}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Stay in the Loop</h2>
+              <p className="max-w-[700px] mx-auto text-primary-foreground/70 md:text-xl">
+                Subscribe to our newsletter and never miss an update or special offer.
               </p>
               <motion.div 
-                className="w-full sm:w-1/2"
+                className="w-full sm:w-auto flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6"
                 variants={fadeIn}
-                transition={{ delay: 0.2 }}
+                transition={{ delay: 0.4 }}
               >
                 <Input 
-                  type="email"
-                  placeholder="Enter your email"
+                  placeholder="Your Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mb-4"
+                  className="sm:w-64"
                 />
-                <Button className="w-full bg-primary hover:bg-primary/90 transition-colors">Subscribe</Button>
+                <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 transition-colors">Subscribe</Button>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         </motion.section>
       </main>
 
-      <footer className="bg-gray-800 text-gray-400 p-6">
-        <div className="container mx-auto flex justify-between">
-          <span>&copy; 2024 Flash Pay. All rights reserved.</span>
-          <div className="space-x-4">
-            <Link href="#" className="hover:text-primary">Privacy Policy</Link>
-            <Link href="#" className="hover:text-primary">Terms of Service</Link>
-            <Link href="#" className="hover:text-primary">Contact Us</Link>
-          </div>
-        </div>
+      <footer className="w-full py-6 text-center">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          &copy; {new Date().getFullYear()} Flash Pay. All rights reserved.
+        </p>
       </footer>
     </div>
   )
