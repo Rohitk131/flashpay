@@ -19,7 +19,7 @@ export default function Users() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('/api/users', { params: { filter } });
+        const response = await axios.get('https://flashpayapp.vercel.app/api/users', { params: { filter } });
         console.log(response.data); 
         setUsers(response.data.users); // Adjusted to match the new key "users" in the API response
       } catch (error) {

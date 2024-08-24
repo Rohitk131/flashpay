@@ -26,7 +26,7 @@ export default function SigninFormDemo() {
     setError("");
 
     try {
-      const response = await fetch("/api/auth/signin", {
+      const response = await fetch("https://flashpayapp.vercel.app/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

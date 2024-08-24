@@ -30,7 +30,7 @@ function SendMoneyContent() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('/api/account/transfer', {
+            const response = await axios.post('https://flashpayapp.vercel.app/api/account/transfer', {
                 to: id,
                 amount
             }, {

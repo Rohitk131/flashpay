@@ -18,7 +18,7 @@ const Balance: React.FC<BalanceProps> = () => {
           return;
         }
 
-        const response = await axios.get<BalanceData>('/api/account/balance', {
+        const response = await axios.get<BalanceData>('https://flashpayapp.vercel.app/api/account/balance', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
