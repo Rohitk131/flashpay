@@ -35,7 +35,7 @@ export default function Component() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-16 flex items-center fixed w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+      <header className="px-4 lg:px-6 h-16 flex justify-between items-center fixed w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
         <Link className="flex items-center justify-center" href="/">
           <img src='https://i.ibb.co/x8Hv1xg/flashpay-05-removebg-preview-1.png' width={40} height={40} />
           <span className="ml-2 text-xl font-bold">Flash Pay</span>
@@ -102,7 +102,7 @@ export default function Component() {
                 <motion.div key={index} variants={fadeIn} transition={{ delay: index * 0.1 }}>
                   <Card className="hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="flex flex-col items-center space-y-2 p-6">
-                      <feature.icon className="w-12 h-12 text-primary" alt={feature.title} />
+                      <feature.icon className="w-12 h-12 text-primary"/>
                       <h3 className="text-xl font-bold">{feature.title}</h3>
                       <p className="text-center text-gray-500 dark:text-gray-400">{feature.description}</p>
                     </CardContent>
