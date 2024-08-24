@@ -1,57 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/lib/dbConnect';
-import { hashPassword } from '@/lib/bcrypt';
+import prisma from '@/lib/dbConnect'; // Assuming you have a central Prisma connection file
+import { comparePassword } from '@/lib/bcrypt';
 import { generateToken } from '@/lib/auth';
 import { z } from 'zod';
 
-const signupBody = z.object({
+const signinBody = z.object({
     username: z.string().email(),
-    firstName: z.string().min(1),
-    lastName: z.string().min(1),
     password: z.string().min(6),
 });
 
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
-        const parsedBody = signupBody.safeParse(body);
+        const parsedBody = signinBody.safeParse(body);
 
         if (!parsedBody.success) {
-            return NextResponse.json({
-                message: "Email already taken / Incorrect inputs"
-            }, { status: 411 });
+            return NextResponse.json({ error: "Invalid input" }, { status: 400 });
         }
 
-        const { username, firstName, lastName, password } = parsedBody.data;
+        const { username, password } = parsedBody.data;
 
-        const existingUser = await prisma.user.findUnique({ where: { username } });
+        const user = await prisma.user.findUnique({ where: { username } });
 
-        if (existingUser) {
-            return NextResponse.json({
-                message: "Email already taken"
-            }, { status: 411 });
+        if (!user || !(await comparePassword(password, user.password))) {
+            return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
         }
-
-        const hashedPassword = await hashPassword(password);
-
-        const user = await prisma.user.create({
-            data: { username, firstName, lastName, password: hashedPassword },
-        });
-
-        const account = await prisma.account.create({
-            data: {
-                userId: user.id,
-                balance: 1 + Math.random() * 10000,
-            },
-        });
 
         const token = generateToken(user.id);
 
         return NextResponse.json({
-            message: "User created successfully",
             token,
+            user: { id: user.id, username: user.username, firstName: user.firstName, lastName: user.lastName },
         });
     } catch (error) {
+        console.error('Error during sign-in:', error);
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
 }
