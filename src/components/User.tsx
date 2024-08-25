@@ -69,14 +69,14 @@ interface UserCardProps {
 
 function UserCard({ user, router }: UserCardProps) {
   return (
-    <div className="bg-slate-200 border border-gray-200 rounded-2xl shadow-2xl p-4 flex items-center justify-between flex-col sm:flex-row">
+    <div className="bg-white border border-gray-300 rounded-2xl shadow-2xl p-4 flex items-center justify-between flex-col sm:flex-row">
       <div className="flex items-center space-x-4 mb-4 sm:mb-0">
-        <div className="rounded-full h-12 w-12 sm:h-16 sm:w-16 bg-white flex items-center justify-center text-xl sm:text-2xl font-semibold text-gray-800">
-          {user.firstName[0]}
+        <div className="rounded-full h-12 w-12 sm:h-16 sm:w-16 bg-green-200 flex items-center justify-center text-xl sm:text-2xl font-semibold text-gray-800">
+          {user.firstName[0].toUpperCase()}
         </div>
         <div className="flex flex-col">
           <span className="text-md sm:text-lg font-semibold text-gray-900">
-            {user.firstName} {user.lastName}
+            {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
           </span>
           <span className="text-sm text-gray-600">
             {user.username}
@@ -85,7 +85,7 @@ function UserCard({ user, router }: UserCardProps) {
       </div>
       <div className="flex flex-col justify-center w-full sm:w-auto">
         <button
-          className="bg-green-500 p-2 sm:p-3 sm:px-4 rounded-2xl text-white font-semibold w-full sm:w-auto"
+          className="bg-green-500 p-2 sm:p-3 sm:px-4 rounded-2xl text-white font-semibold w-full sm:w-auto "
           onClick={() => {
             router.push(`/send?id=${user._id}&name=${user.firstName}`);
           }}

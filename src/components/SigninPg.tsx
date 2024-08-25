@@ -15,8 +15,7 @@ export default function SigninFormDemo() {
 
   const [error, setError] = useState("");
   const router = useRouter();
-  const { login } = useAuth(); // Use the login function from AuthContext
-
+  const { login } = useAuth(); 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };

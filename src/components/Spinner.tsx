@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 export default function OrbitingLoader() {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center pt-64">
       <motion.div
         className="flex"
         animate={{ rotate: 360 }}

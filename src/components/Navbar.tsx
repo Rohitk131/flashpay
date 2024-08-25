@@ -6,7 +6,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ username }: NavbarProps) {
-  const router = useRouter(); // Moved inside the component
+  const router = useRouter(); 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -15,7 +15,7 @@ export default function Navbar({ username }: NavbarProps) {
   };
 
   return (
-    <div className="flex justify-center items-center pt-2 px-2 sm:px-0">
+    <div className="flex justify-center items-center pt-2 px-2 sm:px-0 flex-col">
       <div className="flex flex-col sm:flex-row p-2 shadow-2xl rounded-xl sm:rounded-full w-full sm:w-1/2 justify-between bg-black items-center px-7 mx-2">
         <div className="flex flex-row items-center mb-2 sm:mb-0">
           <img src="https://i.ibb.co/x8Hv1xg/flashpay-05-removebg-preview-1.png" width={40} height={40} />
@@ -42,7 +42,7 @@ export default function Navbar({ username }: NavbarProps) {
           </button>
         </div>
       </div>
-      <h1 className="text-3xl sm:text-4xl text-teal-500 font-mono font-extrabold">What&apos;s up? {username}</h1>
+      
     </div>
   );
 }
