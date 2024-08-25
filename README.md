@@ -1,11 +1,4 @@
 ---
-title: FlashPay
-description: Send money to your friends effortlessly with FlashPay.
----
-
-import Link from 'next/link';
-import Image from 'next/image';
-
 # 🚀 FlashPay
 
 FlashPay is a web application that allows users to send money to their friends with ease. Built using **Next.js**, **Prisma**, **NeonDB**, and **Framer Motion**, FlashPay offers a modern and smooth user experience.
