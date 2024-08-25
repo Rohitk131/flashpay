@@ -40,7 +40,7 @@ export default function Users() {
   if (loading) return <Spinner />;
 
   return (
-    <div className="container mx-auto px-4 py-6 h-screen">
+    <div className="container mx-auto px-4 py-6 ">
       <div className="font-bold text-2xl mb-4 text-black">Your Friends</div>
       <div className="my-4">
         <input
