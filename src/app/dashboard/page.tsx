@@ -27,7 +27,6 @@ export default function Dashboard() {
   return (
     <div>
       <Navbar username={username} />
-      <h1 className="text-3xl sm:text-4xl text-teal-500 font-mono">What&apos;s up? {username}</h1>
       <Balance />
       <Users/>
     </div>

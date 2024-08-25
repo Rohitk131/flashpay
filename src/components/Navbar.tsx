@@ -42,6 +42,7 @@ export default function Navbar({ username }: NavbarProps) {
           </button>
         </div>
       </div>
+      <h1 className="text-3xl sm:text-4xl text-teal-500 font-mono font-extrabold">What&apos;s up? {username}</h1>
     </div>
   );
 }
