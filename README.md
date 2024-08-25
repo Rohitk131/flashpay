@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 FlashPay is a web application that allows users to send money to their friends with ease. Built using **Next.js**, **Prisma**, **NeonDB**, and **Framer Motion**, FlashPay offers a modern and smooth user experience.
 
-![FlashPay Banner](./public/flashpay-banner.png)
+![FlashPay Banner](https://i.ibb.co/1GDBRYb/image.png)
 
 ## ✨ Features
 
