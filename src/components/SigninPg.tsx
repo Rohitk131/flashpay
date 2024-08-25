@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
-
+import Ripple from "@/components/ui/ripple";
 export default function SigninFormDemo() {
   const [formData, setFormData] = useState({
     email: "",
@@ -51,7 +51,8 @@ export default function SigninFormDemo() {
   };
 
   return (
-    <div className="max-w-md w-full mx-auto rounded-2xl md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black border-2 border-gray-100 shadow-2xl">
+<>
+    <div className="max-w-md w-full mx-auto rounded-2xl md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black border-2 border-gray-100 shadow-2xl z-40">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to FlashPay
       </h2>
@@ -61,7 +62,7 @@ export default function SigninFormDemo() {
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      <form className="my-8" onSubmit={handleSubmit}>
+      <form className="my-8 " onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">Email Address</Label>
           <Input
@@ -71,7 +72,7 @@ export default function SigninFormDemo() {
             value={formData.email}
             onChange={handleChange}
             required
-          />
+            />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
@@ -82,13 +83,13 @@ export default function SigninFormDemo() {
             value={formData.password}
             onChange={handleChange}
             required
-          />
+            />
         </LabelInputContainer>
 
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
-        >
+          >
           Sign in &rarr;
           <BottomGradient />
         </button>
@@ -103,6 +104,8 @@ export default function SigninFormDemo() {
         </p>
       </form>
     </div>
+      <Ripple />
+</>
   );
 }
 
