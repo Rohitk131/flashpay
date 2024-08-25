@@ -108,12 +108,10 @@ export default function Component() {
 
       <main className="flex-1 pt-16">
         <div className="relative">
-          
           <div className="absolute inset-0 z-10">
             <BackgroundCover />
           </div>
 
-        
           <motion.section
             className="relative z-20 w-full flex flex-col items-center py-10 justify-center text-center text-white"
             initial="hidden"
@@ -127,7 +125,8 @@ export default function Component() {
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-neutral-700 to-neutral-700 dark:from-neutral-800 dark:via-white dark:to-white">
-              When time matters, trust the speed and reliability of <Cover>Flash Pay</Cover>
+                When time matters, trust the speed and reliability of{" "}
+                <Cover>Flash Pay</Cover>
               </h1>
               <p className="max-w-[700px] mx-auto text-base md:text-2xl text-black">
                 The fastest way to send and receive money. Instant transactions,
@@ -252,8 +251,9 @@ export default function Component() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <p className="italic text-gray-600 dark:text-gray-400">
-                    "{testimonial.quote}"
+                    &quot;{testimonial.quote}&quot;
                   </p>
+
                   <p className="font-semibold">{testimonial.author}</p>
                 </motion.div>
               ))}
