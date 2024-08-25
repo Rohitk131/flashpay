@@ -1,11 +1,39 @@
-import React from 'react';
+import { motion } from 'framer-motion'
 
-const Spinner: React.FC = () => {
+export default function OrbitingLoader() {
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="border-t-4 border-blue-500 border-solid rounded-full w-12 h-12 animate-spin"></div>
+    <div className="flex">
+      <motion.div
+        className="flex"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+      >
+        <motion.div
+          className="mx-1 h-4 w-4 rounded-full bg-red-500"
+          animate={{ scale: [0, 1, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        ></motion.div>
+        <motion.div
+          className="mx-1 h-4 w-4 rounded-full bg-red-500"
+          animate={{ scale: [0, 1, 0] }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 0.5,
+          }}
+        ></motion.div>
+        <motion.div
+          className="mx-1 h-4 w-4 rounded-full bg-red-500"
+          animate={{ scale: [0, 1, 0] }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+        ></motion.div>
+      </motion.div>
     </div>
-  );
-};
-
-export default Spinner;
+  )
+}

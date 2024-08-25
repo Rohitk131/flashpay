@@ -41,7 +41,7 @@ export default function Users() {
 
   return (
     <div className="container mx-auto px-4 py-6 h-screen">
-      <div className="font-bold text-2xl mb-4 text-white">Users</div>
+      <div className="font-bold text-2xl mb-4 text-black">Your Friends</div>
       <div className="my-4">
         <input
           type="text"
@@ -85,7 +85,7 @@ function UserCard({ user, router }: UserCardProps) {
       </div>
       <div className="flex flex-col justify-center w-full sm:w-auto">
         <button
-          className="bg-blue-500 p-2 sm:p-3 sm:px-4 rounded-xl text-white font-semibold w-full sm:w-auto"
+          className="bg-green-500 p-2 sm:p-3 sm:px-4 rounded-2xl text-white font-semibold w-full sm:w-auto"
           onClick={() => {
             router.push(`/send?id=${user._id}&name=${user.firstName}`);
           }}

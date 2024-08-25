@@ -79,7 +79,7 @@ export default function Component() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200">
-      <header className="px-4 lg:px-6 h-16 flex justify-between items-center fixed w-full bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 z-50 shadow-md">
+      <header className="px-4 lg:px-6 h-16 flex justify-between rounded-b-2xl items-center fixed w-full bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 z-50 shadow-md">
         <Link className="flex items-center justify-center" href="/">
           <img
             src="https://i.ibb.co/x8Hv1xg/flashpay-05-removebg-preview-1.png"

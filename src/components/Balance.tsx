@@ -37,9 +37,9 @@ const Balance: React.FC<BalanceProps> = () => {
 
   return (
     <div className="container mx-auto px-4 pt-8">
-      <div className="bg-slate-700 p-6 sm:p-10 rounded-2xl shadow-lg">
+      <div className="bg-slate-800 p-6 sm:p-10 rounded-2xl shadow-lg">
         {isLoading ? (
-          <p className="text-lg sm:text-xl text-white">Loading balance...</p>
+          <p className="text-2xl sm:text-3xl font-medium text-white">Loading balance...</p>
         ) : error ? (
           <p className="text-lg sm:text-xl text-red-400">{error}</p> // Show error message
         ) : (
