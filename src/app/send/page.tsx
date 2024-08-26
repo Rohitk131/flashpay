@@ -55,7 +55,7 @@ function SendMoneyContent() {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-background">
-            <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
+            <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-2xl">
                 <h2 className="text-3xl font-bold text-center mb-6">Send Money</h2>
                 <div className="flex items-center space-x-4 mb-6">
                     <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
@@ -81,7 +81,7 @@ function SendMoneyContent() {
                     {error && <p className="text-red-500 text-sm">{error}</p>}
                     <button
                         onClick={handleTransfer}
-                        className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 ease-in-out"
+                        className="w-full bg-green-500 text-white py-2 px-4  hover:bg-green-600 transition duration-300 ease-in-out rounded-xl"
                         disabled={isLoading}
                     >
                         {isLoading ? 'Processing...' : 'Initiate Transfer'}

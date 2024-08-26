@@ -74,7 +74,7 @@ function UserCard({ user, router }: UserCardProps) {
         <div className="rounded-full h-12 w-12 sm:h-16 sm:w-16 bg-green-200 flex items-center justify-center text-xl sm:text-2xl font-semibold text-gray-800">
           {user.firstName[0].toUpperCase()}
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <span className="text-md sm:text-lg font-semibold text-gray-900">
             {user.firstName.toUpperCase()} {user.lastName.toUpperCase()}
           </span>
